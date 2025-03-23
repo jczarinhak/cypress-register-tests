@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="pt-br">
+<html lang="pt-BR">
 
 <head>
 
@@ -8,52 +8,72 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cadastro de Usuário</title>
+    <title>Página de Comentários</title>
+
+    <script>
+
+        function adicionarComentario() {
+
+            document.getElementById('loading').style.display = 'block';
+
+
+
+            setTimeout(() => {
+
+                document.getElementById('loading').style.display = 'none';
+
+
+
+                const nome = document.getElementById('nome').value;
+
+                const comentario = document.getElementById('comentario').value;
+
+
+
+                if (nome && comentario) {
+
+                    const novoComentario = document.createElement('p');
+
+                    novoComentario.textContent = `${nome}: ${comentario}`;
+
+                    document.getElementById('comment-section').appendChild(novoComentario);
+
+                }
+
+            }, 2000);
+
+        }
+
+    </script>
 
 </head>
 
 <body>
 
-    <h2>Formulário de Cadastro</h2>
-
-    <form id="cadastro">
-
-        <label for="nome">Nome:</label>
-
-        <input type="text" id="nome" name="nome" required><br><br>
+    <h1>Deixe seu comentário</h1>
 
 
 
-        <label for="email">E-mail:</label>
+    <form id="comment-form" onsubmit="event.preventDefault(); adicionarComentario();">
 
-        <input type="email" id="email" name="email" required><br><br>
+        <input type="text" id="nome" placeholder="Digite seu nome" required>
 
+        <textarea id="comentario" placeholder="Escreva seu comentário aqui..." required></textarea>
 
-
-        <label for="telefone">Telefone:</label>
-
-        <input type="tel" id="telefone" name="telefone" pattern="^\d{10}$" required><br><br>
-
-
-
-        <label for="senha">Senha:</label>
-
-        <input type="password" id="senha" name="senha" required><br><br>
-
-
-
-        <label for="confirma_senha">Confirmar Senha:</label>
-
-        <input type="password" id="confirma_senha" name="confirma_senha" required><br><br>
-
-
-
-        <button type="submit">Cadastrar</button>
+        <button id="submit-button" type="submit">Enviar Comentário</button>
 
     </form>
+
+
+
+    <p id="loading" style="display: none;">Enviando...</p>
+
+
+
+    <h2>Comentários</h2>
+
+    <div id="comment-section"></div>
 
 </body>
 
 </html>
-  
-  
