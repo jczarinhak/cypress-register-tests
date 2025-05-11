@@ -2,96 +2,72 @@
 
 <html lang="pt-BR">
 
-
-
 <head>
 
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Avaliação do Veículo</title>
-
-    <script>
-
-        function enviarAvaliacao() {
-
-            document.getElementById('loading').style.display = 'block';
-
-
-
-            setTimeout(() => {
-
-                document.getElementById('loading').style.display = 'none';
-
-
-
-                const nome = document.getElementById('nome').value;
-
-                const comentario = document.getElementById('comentario').value;
-
-
-
-                if (!nome || !comentario) {
-
-                    alert("Por favor, preencha todos os campos.");
-
-                    return;
-
-                }
-
-
-
-                const novaAvaliacao = document.createElement('p');
-
-                novaAvaliacao.textContent = `${nome}: ${comentario}`;
-
-                document.getElementById('avaliacoes').appendChild(novaAvaliacao);
-
-
-
-                document.getElementById('nome').value = "";
-
-                document.getElementById('comentario').value = "";
-
-            }, 3000);
-
-        }
-
-    </script>
+  <title>Área do Aluno</title>
 
 </head>
 
-
-
 <body>
 
-    <h1>Avaliação do Veículo</h1>
+  <h2>Login do Aluno</h2>
+
+  <form id="login-aluno">
+
+    <input type="email" id="email" placeholder="Digite seu e-mail" required />
+
+    <input type="password" id="senha" placeholder="Digite sua senha" required />
+
+    <button type="submit">Acessar</button>
+
+  </form>
 
 
 
-    <form id="avaliacao-form" onsubmit="event.preventDefault(); enviarAvaliacao();">
-
-        <input type="text" id="nome" placeholder="Digite seu nome" required>
-
-        <textarea id="comentario" placeholder="Descreva sua experiência com o veículo..." required></textarea>
-
-        <button id="submit-button" type="submit">Enviar Avaliação</button>
-
-    </form>
+  <p id="mensagem"></p>
 
 
 
-    <p id="loading" style="display: none;">Enviando avaliação...</p>
+  <script>
+
+    const form = document.getElementById('login-aluno');
+
+    const msg = document.getElementById('mensagem');
 
 
 
-    <h2>Avaliações</h2>
+    form.addEventListener('submit', (e) => {
 
-    <div id="avaliacoes"></div>
+      e.preventDefault();
+
+
+
+      const email = document.getElementById('email').value;
+
+      const senha = document.getElementById('senha').value;
+
+
+
+      if (email === "aluno@curso.com" && senha === "curso2024") {
+
+        document.cookie = "curso_token=curso123";
+
+        localStorage.setItem("aluno_email", email);
+
+        msg.textContent = "Acesso concedido!";
+
+      } else {
+
+        msg.textContent = "Credenciais incorretas.";
+
+      }
+
+    });
+
+  </script>
 
 </body>
-
-
 
 </html>
