@@ -1,73 +1,29 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <title>Área do Aluno</title>
-
+  <title>Loja - Carrinho</title>
 </head>
-
 <body>
-
-  <h2>Login do Aluno</h2>
-
-  <form id="login-aluno">
-
-    <input type="email" id="email" placeholder="Digite seu e-mail" required />
-
-    <input type="password" id="senha" placeholder="Digite sua senha" required />
-
-    <button type="submit">Acessar</button>
-
-  </form>
-
-
-
+  <h1>Produto: Livro de Cypress</h1>
+  <button id="btn-add">Adicionar ao Carrinho</button>
   <p id="mensagem"></p>
-
-
-
   <script>
-
-    const form = document.getElementById('login-aluno');
-
+    const btn = document.getElementById('btn-add');
     const msg = document.getElementById('mensagem');
-
-
-
-    form.addEventListener('submit', (e) => {
-
-      e.preventDefault();
-
-
-
-      const email = document.getElementById('email').value;
-
-      const senha = document.getElementById('senha').value;
-
-
-
-      if (email === "aluno@curso.com" && senha === "curso2024") {
-
-        document.cookie = "curso_token=curso123";
-
-        localStorage.setItem("aluno_email", email);
-
-        msg.textContent = "Acesso concedido!";
-
-      } else {
-
-        msg.textContent = "Credenciais incorretas.";
-
-      }
-
+    btn.addEventListener('click', () => {
+      const produto = "Livro de Cypress";
+      document.cookie = "carrinho_token=carrinho456";
+      localStorage.setItem("itens_carrinho", JSON.stringify([produto]));
+      msg.textContent = "Produto adicionado com sucesso!";
     });
-
+    window.addEventListener('load', () => {
+      const itens = JSON.parse(localStorage.getItem("itens_carrinho") || "[]");
+      if (itens.length > 0) {
+        document.getElementById('mensagem').textContent = `Carrinho com ${itens.length} item(ns).`;
+      }
+    });
   </script>
-
 </body>
-
 </html>
+
